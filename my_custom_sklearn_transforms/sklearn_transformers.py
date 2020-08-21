@@ -2,7 +2,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 
 # All sklearn Transforms must have the `transform` and `fit` methods
-class FillNaNColumns(BaseEstimator, TransformerMixin):
+class DropColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns, fill=0):
         self.columns = columns
         self.fill = fill
@@ -17,4 +17,4 @@ class FillNaNColumns(BaseEstimator, TransformerMixin):
             data[column].fillna(self.fill,
                                 inplace=True)
         # Retornamos um novo dataframe sem as colunas indesejadas
-        return data
+        return data.drop(labels=self.columns, axis='columns')
